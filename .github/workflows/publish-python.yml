@@ -43,7 +43,7 @@ jobs:
 
     - name: Get version from tag
       id: tag-version
-      run: ${{ git describe --tags --abbrev=0 }} >> $GITHUB_OUTPUT
+      run: $(git describe --tags --abbrev=0) >> $GITHUB_OUTPUT
 
     - name: Build python package
       run: python3 -m pip wheel --wheel-dir ./build  .
