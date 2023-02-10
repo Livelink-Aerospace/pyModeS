@@ -38,13 +38,6 @@ jobs:
         pip install keyrings.google-artifactregistry-auth
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Get tags # The checkut operation does not get tags so we need to do it
-      run: git fetch --tags -f origin
-
-    - name: Get version from tag
-      id: tag-version
-      run: $(git describe --tags --abbrev=0 --always) >> $GITHUB_OUTPUT
-
     - name: Build python package
       run: python3 -m pip wheel --wheel-dir ./build  .
 
