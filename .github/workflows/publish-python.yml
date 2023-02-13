@@ -39,7 +39,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Build python package
-      run: python3 -m pip wheel --wheel-dir ./build  .
+      run: python3 -m pip wheel --wheel-dir ./build --platform linux-armv7l  .
 
     - name: write key file
       run: 'echo "$JSON_KEY" > key.json'
