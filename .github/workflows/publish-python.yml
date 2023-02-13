@@ -33,7 +33,7 @@ jobs:
       run: |
         sudo apt-get install git
         python -m pip install --upgrade pip
-        python -m pip install wheel twine
+        python -m pip install wheel build twine
         python -m pip install keyring
         pip install keyrings.google-artifactregistry-auth
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -49,7 +49,6 @@ jobs:
         JSON_KEY: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - name: Upload to Artifact Registry
-      working-directory: ./build
       run: |
         gcloud auth activate-service-account --key-file=key.json
         gcloud config set project aero-chain-home
@@ -57,4 +56,5 @@ jobs:
         gcloud config set artifacts/location europe-west2
         gcloud config set account ci-package-uploader@aero-chain-home.iam.gserviceaccount.com
         gcloud artifacts print-settings python  > ~/.pypirc
-        python -m twine upload --repository python-packages ./*
+        ls -al ./build
+        python -m twine upload --repository python-packages ./build/*
