@@ -42,7 +42,6 @@ jobs:
       run: python3 -m pip wheel --wheel-dir ./build  .
 
     - name: write key file
-      working-directory: ./build
       run: 'echo "$JSON_KEY" > key.json'
       shell: bash
       env:
